@@ -71,7 +71,7 @@ public class GrafoInterfaz extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if(grafo.getVertexByValue(VerticeIniciocomboBox1.getSelectedItem().toString()).aristaUnica(VerticeFinalcomboBox1.getSelectedItem().toString())){
                     grafo.addArista(VerticeIniciocomboBox1.getSelectedItem().toString(),VerticeFinalcomboBox1.getSelectedItem().toString(),Integer.parseInt(PesotextField1.getText()));
-                    JOptionPane.showMessageDialog(null, "Arista agregada con éxito");
+                    JOptionPane.showMessageDialog(null, "Aristas agregada con éxito");
                 }else{
                     JOptionPane.showMessageDialog(null, "Esta arista ya existe");
                 }
@@ -125,6 +125,20 @@ public class GrafoInterfaz extends JFrame {
                 textArea1.setText(resultText.toString());
             }
         });
+        quemarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                grafo.addVertice("A");
+                grafo.addVertice("B");
+                grafo.addVertice("C");
+                grafo.addArista("A","B",5);
+                grafo.addArista("A","C",6);
+                grafo.addArista("B","C",4);
+                JOptionPane.showMessageDialog(null, "Datos quemados correctamente");
+
+            }
+        });
+
     }
 
     public JPanel getMainPanel() {
