@@ -2,6 +2,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+//import java.util.Dictionary;
+import java.util.Dictionary;
+import java.util.Enumeration;
 import java.util.List;
 
 public class GrafoInterfaz extends JFrame {
@@ -98,6 +101,28 @@ public class GrafoInterfaz extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 textArea1.setText(grafo.breadthFirstTraversal(grafo.getVertexByValue(BusVerticeInicialcomboBox1.getSelectedItem().toString())));
+            }
+        });
+        DIJASKSTRAButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Dictionary[] result = grafo.Dijsktra(grafo.getVertexByValue(BusVerticeInicialcomboBox1.getSelectedItem().toString()));
+                Dictionary<String, Integer> distances = result[0];
+                Dictionary<String, Vertice> previous = result[1];
+
+                StringBuilder resultText = new StringBuilder();
+                Enumeration<String> keys = distances.keys(); // Obtener las claves usando keys()
+                while (keys.hasMoreElements()) {
+                    String vertexData = keys.nextElement();
+                    int distance = distances.get(vertexData);
+                    Vertice previousVertex = previous.get(vertexData);
+
+                    resultText.append("Vertice: ").append(vertexData).append("\n");
+                    resultText.append("Distancia: ").append(distance).append("\n");
+                    resultText.append("Vértice previo: ").append(previousVertex.getDato()).append("\n");
+                    resultText.append("-------------------\n");
+                }
+                textArea1.setText(resultText.toString());
             }
         });
     }
